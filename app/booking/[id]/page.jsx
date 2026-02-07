@@ -87,6 +87,40 @@ export default async function BookingPage({ params }) {
                     </div>
                 </div>
             </div>
+
+            {/* More Properties Section */}
+            <div className="mt-20">
+                <h2 className="text-3xl font-bold mb-8">Explore More Properties</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {properties.map((prop) => (
+                        <Link href={`/booking/${prop.id}`} key={prop.id}>
+                            <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition cursor-pointer h-full">
+                                <div className="h-40 overflow-hidden">
+                                    <img src={prop.imageUrl} alt={prop.name} className="w-full h-full object-cover hover:scale-105 transition" />
+                                </div>
+
+                                <div className="p-4">
+                                    <h3 className="font-bold text-lg text-foreground mb-1">{prop.name}</h3>
+                                    <div className="flex items-center gap-1 text-muted-foreground text-sm mb-3">
+                                        <MapPin size={16} />
+                                        {prop.location}
+                                    </div>
+
+                                    <div className="flex items-center justify-between mb-4">
+                                        <div className="flex items-center gap-1">
+                                            <Star size={16} className="fill-yellow-400 text-yellow-400" />
+                                            <span className="font-semibold text-foreground">{prop.rating}</span>
+                                            <span className="text-muted-foreground text-sm">({prop.reviews})</span>
+                                        </div>
+                                    </div>
+
+                                    <div className="text-2xl font-bold text-primary">${prop.price}/night</div>
+                                </div>
+                            </div>
+                        </Link>
+                    ))}
+                </div>
+            </div>
         </main>
     )
 }

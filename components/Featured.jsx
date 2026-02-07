@@ -23,7 +23,7 @@ export default function Featured() {
       reviews: 128,
       price: '$450/night',
       imageUrl:
-        'https://images.unsplash.com/photo-1501117716987-c8e5a3b8d6c9?auto=format&fit=crop&w=1200&q=80',
+        '/ocean.png',
       featured: true,
       description: 'A private villa with direct ocean access, infinity pool and personal chef.'
     },
@@ -68,7 +68,7 @@ export default function Featured() {
       reviews: 64,
       price: '$190/night',
       imageUrl:
-        'https://images.unsplash.com/photo-1505691723518-36a0319d41dd?auto=format&fit=crop&w=1200&q=80',
+        '/countryside.jpg',
       description: 'Charming farmhouse surrounded by vineyards and olive groves.'
     },
     {
@@ -79,7 +79,7 @@ export default function Featured() {
       reviews: 48,
       price: '$210/night',
       imageUrl:
-        'https://images.unsplash.com/photo-1505765055259-0a2f8a6b0f4d?auto=format&fit=crop&w=1200&q=80',
+        '/desert.jpg',
       description: 'Secluded riad with courtyard, pool and traditional Moroccan decor.'
     },
     {
