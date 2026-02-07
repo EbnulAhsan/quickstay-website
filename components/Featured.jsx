@@ -1,6 +1,8 @@
 'use client'
 
 import { Star, MapPin } from 'lucide-react'
+import { useRef, useEffect } from 'react'
+import gsap from 'gsap'
 import {
   Dialog,
   DialogTrigger,
@@ -14,6 +16,8 @@ import { useRouter } from 'next/navigation'
 
 export default function Featured() {
   const router = useRouter()
+  const containerRef = useRef(null)
+  const cardsRef = useRef([])
   const properties = [
     {
       id: 1,
@@ -106,6 +110,38 @@ export default function Featured() {
     }
   ]
 
+  useEffect(() => {
+    const cards = cardsRef.current.filter(Boolean)
+    if (cards.length === 0) return
+
+    gsap.fromTo(
+      cards,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.8, stagger: 0.12, ease: 'power2.out' }
+    )
+
+    const listeners = []
+    cards.forEach((card) => {
+      const onEnter = () => {
+        gsap.to(card, { y: -10, boxShadow: '0 20px 40px rgba(0,0,0,0.12)', duration: 0.28, ease: 'power2.out' })
+      }
+      const onLeave = () => {
+        gsap.to(card, { y: 0, boxShadow: '0 10px 30px rgba(0,0,0,0.06)', duration: 0.28, ease: 'power2.out' })
+      }
+
+      card.addEventListener('mouseenter', onEnter)
+      card.addEventListener('mouseleave', onLeave)
+      listeners.push({ card, onEnter, onLeave })
+    })
+
+    return () => {
+      listeners.forEach(({ card, onEnter, onLeave }) => {
+        card.removeEventListener('mouseenter', onEnter)
+        card.removeEventListener('mouseleave', onLeave)
+      })
+    }
+  }, [])
+
   return (
     <section id="properties" className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
@@ -119,9 +155,13 @@ export default function Featured() {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {properties.map((property) => (
-            <div key={property.id} className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" ref={containerRef}>
+          {properties.map((property, idx) => (
+            <div
+              key={property.id}
+              ref={(el) => (cardsRef.current[idx] = el)}
+              className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition cursor-pointer"
+            >
               <div className="h-40 relative">
                 <img src={property.imageUrl} alt={property.name} className="object-cover w-full h-full" />
                 {property.featured && (
@@ -191,3 +231,6 @@ export default function Featured() {
     </section>
   )
 }
+
+// Add animations after component definition (client-side only)
+// Note: useEffect cannot be used outside component; keep animation setup inside component
