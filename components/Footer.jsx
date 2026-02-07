@@ -41,7 +41,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <Phone size={18} />
-                <span>+1 (555) 123-4567</span>
+                <span>01705141866</span>
               </div>
             </div>
           </div>
@@ -49,8 +49,8 @@ export default function Footer() {
 
         <div className="border-t border-gray-700 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <p className="text-gray-400 text-sm">© 2024 QuickStay. All rights reserved.</p>
-            
+            <p className="text-gray-400 text-sm">© 2024 QuickStay. All rights reserved by Ebnul Ahsan</p>
+
             <div className="flex gap-6">
               <a href="#" className="text-gray-300 hover:text-white transition">
                 <Facebook size={20} />
